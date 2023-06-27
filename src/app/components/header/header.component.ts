@@ -5,7 +5,7 @@ import { CartItem } from 'src/app/models/cart.model';
 
 @Component({
   selector: 'app-header',
-  templateUrl:  './header.component.html', 
+  templateUrl: './header.component.html',
 })
 export class HeaderComponent {
   private _cart: Cart = { items: [] };
@@ -21,17 +21,26 @@ export class HeaderComponent {
     this._cart = cart;
 
     this.itemsQuantity = cart.items
-    .map((item) => item.quantity)
-    .reduce((prev, curr) => prev + curr, 0);
+      .map((item) => item.quantity)
+      .reduce((prev, curr) => prev + curr, 0);
   }
 
   constructor(private cartService: CartService) { }
 
 
-    getTotal(items: Array<CartItem>): number {
-      return this.cartService.getTotal(items);
-      }
+  getTotal(items: Array<CartItem>): number {
+    return this.cartService.getTotal(items);
   }
+
+  onClearCart() {
+    this.cartService.clearCart();
+  }
+
+
+
+
+}
+
 
 
 
